@@ -13,11 +13,11 @@ def rMap(add):
     map = [[],[],[],[],[],[],[],[],[],[]]
     mapvar = add
     splitmap = mapvar.split('\n')
-    for i in range(0,mapvar.count('\n')):
-        for l in range(0,len(splitmap[i])):
-            attri = blocks[splitmap[i][l]]
+    for y in range(0,mapvar.count('\n')):
+        for x in range(0,len(splitmap[y])):
+            attri = blocks[splitmap[y][x]]
             mat = attri['mat']
             soli = attri['soli']
             trans = attri['trans']
-            map[i].append(mapCell(i,l,mat,trans,soli))
+            map[y].append(mapCell(x,y,mat,trans,soli))
     return map
