@@ -1,0 +1,17 @@
+012980 #Version
+
+10,10 #Height, width of the map (in tiles)
+
+000000&000
+0110011100
+0100000000
+1111100011
+0001101011 #The layout of the map represented by the tile characters
+&001101011
+1100110011
+0010000000
+1111111111
+
+e:Snake:2,9
+e:Caveman:0,1 #Entities
+e:Player:0,6
