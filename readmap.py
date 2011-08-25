@@ -14,11 +14,15 @@ class mapCell(pygame.sprite.Sprite):
 
 class mapObj():
 	def __init__(self, add):
+		print "17"
 		base = [[],[],[],[],[],[],[],[],[],[]]
 		mapvar = add
 		splitmap = mapvar.split('\n')
+		print "21"
 		for y in range(0,mapvar.count('\n')):
+			print "23"
 			for x in range(0,len(splitmap[y])):
+				print "25"
 				attri = blocks[splitmap[y][x]]
 				mat = pygame.image.load('resources%s%s'% (os.sep, attri['mat']))
 				soli = attri['soli']
