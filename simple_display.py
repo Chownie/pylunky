@@ -19,32 +19,47 @@ def controls(key, puppet, mapinfo):
 	pygame.event.pump()
 	
 	if key[pygame.K_LEFT]: 
-		tempx = puppet.x-1
-		tile = mapinfo[(puppet.y+15)/32][int((tempx+31)/32)]
-		puppet.x-=collide(tile)
+		pass
+#		tempx = puppet.x-1
+#		tile = mapinfo[int(round(puppet.y+16/32))/32][int(round(tempx+16/32))/32]
+#		puppet.x-=collide(tile)
 	elif key[pygame.K_RIGHT]: 
-		tempx = puppet.x+32
-		tile = mapinfo[int(round(puppet.y+16/32))/32][int(round(tempx+16/32))/32]
-		puppet.x+=collide(tile)
-
+		pass
+#		tempx = puppet.x+32
+#		tile = mapinfo[int(round(puppet.y+16/32))/32][int(round(tempx+16/32))/32]
+#		puppet.x+=collide(tile)
+#
 	if key[pygame.K_UP]:
-		tempy = puppet.y-1
-		tile = mapinfo[int(round(tempy+16/32))/32][int(round(puppet.x+16/32))/32]
-		puppet.y-=collide(tile)
+		pass
+#		tempy = puppet.y-1
+#		tile = mapinfo[int(round(tempy+16/32))/32][int(round(puppet.x+16/32))/32]
+#		puppet.y-=collide(tile)
 	elif key[pygame.K_DOWN]: 
-		tempy = puppet.y+32
-		tile = mapinfo[int(round(tempy+16/32))/32][int(round(puppet.x+16/32))/32]
-		puppet.y+=collide(tile)
-
+		pass
+#		tempy = puppet.y+32
+#		tile = mapinfo[int(round(tempy+16/32))/32][int(round(puppet.x+16/32))/32]
+#		puppet.y+=collide(tile)
+		
 	if key[pygame.K_ESCAPE]: exit()
 
-def collide(tile):
-	if tile.soli == False:
-		print "FREE: "+str((tile.posx, tile.posy))
-		return 1
-	else:
-		print "COLLIDE: "+str((tile.posx, tile.posy))
-		return 0
+def collide(puppet, mapinf, x, y):
+	result = False
+	if x>0:
+		tempx = puppet.x + x
+	elif x<0:
+		tempx = puppet.x + x
+	if y>0:
+		tempy = puppet.y + y
+	elif y<0:
+		tempy = puppet.y + y
+
+#def collide(tile):
+#	if tile.soli == False:
+#		print "FREE: "+str((tile.posx, tile.posy))
+#		return 1
+#	else:
+#		print "COLLIDE: "+str((tile.posx, tile.posy))
+#		return 0
 
 def main():
 	newmover = mover.Mover(x=12,y=12, direction=0, speed=0, image=pygame.image.load('./resources/a.jpg'))
@@ -57,9 +72,9 @@ def main():
 		if key[pygame.K_SPACE]: pygame.image.save(screen, 'screenshot.png')
 		controls(key, newmover, mapinfo)
 
-		for i in mapinfo:
-			for k in i:						
-				screen.blit(k.mat, (k.posx*32,k.posy*32))
+		for k in mapinfo:
+			for i in k:						
+				screen.blit(i.mat, (i.posx*32,i.posy*32))
 		screen.blit(newmover.image, (newmover.x,newmover.y))
 		pygame.display.flip()
 		clock.tick(60)

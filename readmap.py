@@ -15,11 +15,11 @@ def rMap(add):
     map = [[],[],[],[],[],[],[],[],[],[]]
     mapvar = add
     splitmap = mapvar.split('\n')
-    for y in range(0,mapvar.count('\n')):
-        for x in range(0,len(splitmap[y])):
-            attri = blocks[splitmap[y][x]]
+    for x in range(0,mapvar.count('\n')):
+        for y in range(0,len(splitmap[x])):
+            attri = blocks[splitmap[x][y]]
             mat = pygame.image.load('./resources/'+attri['mat'])
             soli = attri['soli']
             trans = attri['trans']
-            map[y].append(mapCell(x,y,mat,trans,soli))
+            map[x].append(mapCell(x,y,mat,trans,soli))
     return map
