@@ -51,7 +51,7 @@ def collide(tile):
 def main():
 	newmover = mover.Mover(x=12,y=12, direction=0, speed=0, image=pygame.image.load('resources%sa.jpg' % os.sep))
 	mapfile = open('1.map','r').read()
-	mapinfo = rMap(mapfile)
+	mapinfo = mapObj(mapfile)
 
 	while True:
 		pygame.event.pump()
