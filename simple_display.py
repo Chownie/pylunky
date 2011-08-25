@@ -19,51 +19,38 @@ def controls(key, puppet, mapinfo):
 	pygame.event.pump()
 	
 	if key[pygame.K_LEFT]: 
-		pass
-#		tempx = puppet.x-1
-#		tile = mapinfo[int(round(puppet.y+16/32))/32][int(round(tempx+16/32))/32]
-#		puppet.x-=collide(tile)
+		tempx = puppet.x-1
+		tile = mapinfo[int(round(puppet.y+16/32))/32][int(round(tempx+16/32))/32]
+		puppet.x-=collide(tile)
+
 	elif key[pygame.K_RIGHT]: 
-		pass
-#		tempx = puppet.x+32
-#		tile = mapinfo[int(round(puppet.y+16/32))/32][int(round(tempx+16/32))/32]
-#		puppet.x+=collide(tile)
-#
+		tempx = puppet.x+32
+		tile = mapinfo[int(round(puppet.y+16/32))/32][int(round(tempx+16/32))/32]
+		puppet.x+=collide(tile)
+
 	if key[pygame.K_UP]:
-		pass
-#		tempy = puppet.y-1
-#		tile = mapinfo[int(round(tempy+16/32))/32][int(round(puppet.x+16/32))/32]
-#		puppet.y-=collide(tile)
+		tempy = puppet.y-1
+		tile = mapinfo[int(round(tempy+16/32))/32][int(round(puppet.x+16/32))/32]
+		puppet.y-=collide(tile)
+
 	elif key[pygame.K_DOWN]: 
-		pass
-#		tempy = puppet.y+32
-#		tile = mapinfo[int(round(tempy+16/32))/32][int(round(puppet.x+16/32))/32]
-#		puppet.y+=collide(tile)
+		tempy = puppet.y+32
+		tile = mapinfo[int(round(tempy+16/32))/32][int(round(puppet.x+16/32))/32]
+		puppet.y+=collide(tile)
 		
 	if key[pygame.K_ESCAPE]: exit()
 
-def collide(puppet, mapinf, x, y):
-	result = False
-	if x>0:
-		tempx = puppet.x + x
-	elif x<0:
-		tempx = puppet.x + x
-	if y>0:
-		tempy = puppet.y + y
-	elif y<0:
-		tempy = puppet.y + y
-
-#def collide(tile):
-#	if tile.soli == False:
-#		print "FREE: "+str((tile.posx, tile.posy))
-#		return 1
-#	else:
-#		print "COLLIDE: "+str((tile.posx, tile.posy))
-#		return 0
+def collide(tile):
+	if tile.soli == False:
+		print "FREE: "+str((tile.posx, tile.posy))
+		return 1
+	else:
+		print "COLLIDE: "+str((tile.posx, tile.posy))
+		return 0
 
 def main():
-	newmover = mover.Mover(x=12,y=12, direction=0, speed=0, image=pygame.image.load('./resources/a.jpg'))
-	mapfile = open('./1.map','r').read()
+	newmover = mover.Mover(x=12,y=12, direction=0, speed=0, image=pygame.image.load('resources%sa.jpg' % os.sep))
+	mapfile = open('1.map','r').read()
 	mapinfo = rMap(mapfile)
 
 	while True:

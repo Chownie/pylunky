@@ -2,6 +2,7 @@
 from resources.blocks import *
 import pygame
 from pygame.locals import *
+import os
 
 class mapCell(pygame.sprite.Sprite):
     def __init__(self, posx=None, posy=None, mat=None, trans=None, soli=None):
@@ -15,10 +16,10 @@ def rMap(add):
     map = [[],[],[],[],[],[],[],[],[],[]]
     mapvar = add
     splitmap = mapvar.split('\n')
-    for x in range(0,mapvar.count('\n')):
-        for y in range(0,len(splitmap[x])):
-            attri = blocks[splitmap[x][y]]
-            mat = pygame.image.load('./resources/'+attri['mat'])
+    for y in range(0,mapvar.count('\n')):
+        for x in range(0,len(splitmap[y])):
+            attri = blocks[splitmap[y][x]]
+            mat = pygame.image.load('resources%s%s'% (os.sep, attri['mat']))
             soli = attri['soli']
             trans = attri['trans']
             map[x].append(mapCell(x,y,mat,trans,soli))
