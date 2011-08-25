@@ -1,7 +1,7 @@
 import pygame
 import os
 import sys
-from readmap import *
+import readmap
 import time
 import mover
 import random
@@ -20,22 +20,22 @@ def controls(key, puppet, mapinfo):
 	
 	if key[pygame.K_LEFT]: 
 		tempx = puppet.x-1
-		tile = mapinfo[int(round(puppet.y+16/32))/32][int(round(tempx+16/32))/32]
+		tile = mapinfo.tile(round(tempx+16/32)/32,round(puppet.y+16/32)/32)
 		puppet.x-=collide(tile)
 
 	elif key[pygame.K_RIGHT]: 
 		tempx = puppet.x+32
-		tile = mapinfo[int(round(puppet.y+16/32))/32][int(round(tempx+16/32))/32]
+		tile = mapinfo.tile(round(tempx+16/32)/32,round(puppet.y+16/32)/32)
 		puppet.x+=collide(tile)
 
 	if key[pygame.K_UP]:
 		tempy = puppet.y-1
-		tile = mapinfo[int(round(tempy+16/32))/32][int(round(puppet.x+16/32))/32]
+		tile = mapinfo.tile(round(puppet.x+16/32)/32,round(tempy+16/32)/32)		
 		puppet.y-=collide(tile)
 
 	elif key[pygame.K_DOWN]: 
 		tempy = puppet.y+32
-		tile = mapinfo[int(round(tempy+16/32))/32][int(round(puppet.x+16/32))/32]
+		tile = mapinfo.tile(round(puppet.x+16/32)/32,round(tempy+16/32)/32)
 		puppet.y+=collide(tile)
 		
 	if key[pygame.K_ESCAPE]: exit()
@@ -50,8 +50,7 @@ def collide(tile):
 
 def main():
 	newmover = mover.Mover(x=12,y=12, direction=0, speed=0, image=pygame.image.load('resources%sa.jpg' % os.sep))
-	mapfile = open('1.map','r').read()
-	mapinfo = mapObj(mapfile)
+	mapinfo = readmap.mapObj('1.map')
 
 	while True:
 		pygame.event.pump()
@@ -59,7 +58,7 @@ def main():
 		if key[pygame.K_SPACE]: pygame.image.save(screen, 'screenshot.png')
 		controls(key, newmover, mapinfo)
 
-		for k in mapinfo:
+		for k in mapinfo.map():
 			for i in k:						
 				screen.blit(i.mat, (i.posx*32,i.posy*32))
 		screen.blit(newmover.image, (newmover.x,newmover.y))
