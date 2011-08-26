@@ -90,7 +90,6 @@ def controls(key, o):
 def main():
 	global mapinfo
 	
-	image = pygame.image.load('resources%sa.png' % os.sep)
 	newmover = mover.Mover(x=12,y=12, direction=0, speed=0, image=image.convert_alpha())
 	mapinfo = readmap.mapObj('1.map')
 
