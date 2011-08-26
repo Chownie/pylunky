@@ -10,4 +10,4 @@ class Mover():
 		self.direction = 0
 		self.speed = 0
 		self.jump = -1
-		self.image = pygame.image.load(os.path.join('resources','a.png'))
+		self.image = pygame.image.load('./resources/a.png')
