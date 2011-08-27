@@ -29,7 +29,7 @@ def oMove(o, x, y):
 		
 	if x<0:
 		tempx = o.x + x 
-		if gTile(round((tempx+o.w)/32), round((o.y+o.h)/32)).soli == False and gTile(round((tempx+o.w)/32), round((o.y+o.h)/32)).soli == False:
+		if gTile(round((tempx+1)/32), round((o.y+o.h)/32)).soli == False and gTile(round((tempx+1)/32), round((o.y+o.h)/32)).soli == False:
 			o.x = o.x + x
 			
 	if y>0:
@@ -41,7 +41,7 @@ def oMove(o, x, y):
 			
 	if y<0:
 		tempy = o.y + y 
-		if gTile(round((o.x+o.w)/32), round((tempy+o.h)/32)).soli == False and gTile(round((o.x+o.w)/32), round((tempy+o.h)/32)).soli == False:
+		if gTile(round((o.x+o.w)/32), round((tempy+1)/32)).soli == False and gTile(round((o.x+o.w)/32), round((tempy+1)/32)).soli == False:
 			o.y = tempy
 		else:
 			o.jump = -1		
