@@ -4,7 +4,7 @@ import pygame
 from pygame.locals import *
 import os
 
-class mapCell():
+class MapCell():
 	def __init__(self, posx=None, posy=None, mat=None, trans=None, soli=None):
 		self.mat = mat
 		self.posx = posx
@@ -12,7 +12,7 @@ class mapCell():
 		self.trans = trans
 		self.soli = soli
 
-class mapObj():
+class MapObj():
 	def __init__(self, add):
 		print "17"
 		base = []
@@ -25,13 +25,13 @@ class mapObj():
 				mat = pygame.image.load('resources%s%s'% (os.sep, attri['mat']))
 				soli = attri['soli']
 				trans = attri['trans']
-				newbit.append(mapCell(x,y,mat,trans,soli))
+				newbit.append(MapCell(x,y,mat,trans,soli))
 			base.append(newbit)
 		self.mapinfo = base
 
 	def tile(self, x, y):
 		if x < 0 or x >= self.width() or y < 0 or y >= self.height():
-			return mapCell(soli=True)
+			return MapCell(soli=True)
 		else:
 			return self.mapinfo[int(y)][int(x)]
 
