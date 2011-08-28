@@ -100,7 +100,7 @@ def main():
 	newmover = mover.Mover(x=12,y=12, direction=0, speed=0, image=image.convert_alpha())
 	mapinfo = readmap.MapObj('1.map')
 
-	cam = camera.cam(newmover.x, newmover.y, height, width)
+	cam = camera.cam(newmover.x, newmover.y, width, height, mapinfo.width()*32, mapinfo.height()*32)
 	
 	while True:
 		pygame.event.pump()
