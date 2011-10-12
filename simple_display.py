@@ -72,14 +72,9 @@ def controls(key, o):
 
 	elif key[pygame.K_RIGHT]: 
 		oMove(o, 1, 0)
-		move = 1
-		
-	if key[pygame.K_UP]:
-		oMove(o, 0, -1)
-		move = 1
-		
+		move = 1		
 
-	elif key[pygame.K_DOWN]: 
+	if key[pygame.K_DOWN]: 
 		oMove(o, 0, 1)
 		move = 1
 	
@@ -107,7 +102,7 @@ def main():
 		key = pygame.key.get_pressed()
 
 		controls(key, newmover)
-		gravity(newmover, 3, 32)
+		gravity(newmover, 4, 24)
 
 #		cam.move(newmover.x, newmover.y)
 		

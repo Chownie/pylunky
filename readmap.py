@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from resources.blocks import *
+from resources.entities import *
 import pygame
 from pygame.locals import *
 import os
@@ -14,10 +15,8 @@ class MapCell():
 
 class MapObj():
 	def __init__(self, add):
-		print "17"
 		base = []
-		mapvar = open(add).read()
-		splitmap = mapvar.split('\n')
+		splitmap = add.split('\n')
 		for y in range(0,mapvar.count('\n')):
 			newbit = []
 			for x in range(0,len(splitmap[y])):
@@ -43,3 +42,26 @@ class MapObj():
 
 	def width(self):
 		return len(self.mapinfo[0])
+
+class EntMap():
+	
+
+class Entity():
+	def __init__(self, x=None, y=None, hp=None, mat=None):
+		self.x = x
+		self.y = y
+		self.hp = hp
+		self.mat = mat
+
+	def move(x=self.x, y=self.y):
+		self.x = x
+		self.y = y
+	
+class ReadMap():
+	def __init__(self, file):
+		f = open(file,'r')
+		mapfile = f.read()
+		f.close()
+
+		self.gamemap = MapObj(mapfile.split('MAP\n')[1])
+		self.entlist = EntMap(mapfile.split('ENT\n')[1].split('MAP\n')[0])
