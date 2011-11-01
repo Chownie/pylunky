@@ -32,7 +32,7 @@ def oMove(o, x, y):
 			
 	if y>0:
 		tempy = o.y + y 
-		if gameinfo.gamemap.tile(round((o.x+1)/32), round((tempy++(o.h-1))/32)).soli == False and gameinfo.gamemap.tile(round((o.x+(o.w-1))/32), round((tempy+(o.h-1))/32)).soli == False:
+		if gameinfo.gamemap.tile(round((o.x+1)/32), round((tempy+(o.h-1))/32)).soli == False and gameinfo.gamemap.tile(round((o.x+(o.w-1))/32), round((tempy+(o.h-1))/32)).soli == False:
 			o.y = tempy
 		else:
 			o.jump = 0
