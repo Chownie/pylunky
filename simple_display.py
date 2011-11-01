@@ -19,30 +19,27 @@ clock = pygame.time.Clock()
 
 global collisions
 
-def gTile(x, y):
-	return mapinfo.tile(x,y)
-
 def oMove(o, x, y):	
 	if x>0:
 		tempx = o.x + x 
-		if gTile(round((tempx+(o.w-1))/32), round((o.y+1)/32)).soli == False and gTile(round((tempx+(o.w-1))/32), round((o.y+(o.h-1))/32)).soli == False:
+		if gameinfo.gamemap.tile(round((tempx+(o.w-1))/32), round((o.y+1)/32)).soli == False and gameinfo.gamemap.tile(round((tempx+(o.w-1))/32), round((o.y+(o.h-1))/32)).soli == False:
 			o.x = o.x + x
 		
 	if x<0:
 		tempx = o.x + x 
-		if gTile(round((tempx+1)/32), round((o.y+1)/32)).soli == False and gTile(round((tempx+1)/32), round((o.y+(o.h-1))/32)).soli == False:
+		if gameinfo.gamemap.tile(round((tempx+1)/32), round((o.y+1)/32)).soli == False and gameinfo.gamemap.tile(round((tempx+1)/32), round((o.y+(o.h-1))/32)).soli == False:
 			o.x = o.x + x
 			
 	if y>0:
 		tempy = o.y + y 
-		if gTile(round((o.x+1)/32), round((tempy++(o.h-1))/32)).soli == False and gTile(round((o.x+(o.w-1))/32), round((tempy+(o.h-1))/32)).soli == False:
+		if gameinfo.gamemap.tile(round((o.x+1)/32), round((tempy++(o.h-1))/32)).soli == False and gameinfo.gamemap.tile(round((o.x+(o.w-1))/32), round((tempy+(o.h-1))/32)).soli == False:
 			o.y = tempy
 		else:
 			o.jump = 0
 			
 	if y<0:
 		tempy = o.y + y 
-		if gTile(round((o.x+1)/32), round((tempy+1)/32)).soli == False and gTile(round((o.x+(o.w-1))/32), round((tempy+1)/32)).soli == False:
+		if gameinfo.gamemap.tile(round((o.x+1)/32), round((tempy+1)/32)).soli == False and gameinfo.gamemap.tile(round((o.x+(o.w-1))/32), round((tempy+1)/32)).soli == False:
 			o.y = tempy
 		else:
 			o.jump = -1
@@ -66,6 +63,11 @@ def controls(key, o):
 	
 	move = 0
 	
+	if key[pygame.K_TAB]:
+		for ent in gameinfo.entlist.entlist:
+			if ent.x == o.x/32 and ent.y == o.y/32:
+				ent.attach(o)
+
 	if key[pygame.K_LEFT]: 
 		oMove(o, -1, 0)
 		move = 1
@@ -89,13 +91,13 @@ def controls(key, o):
 	
 			
 def main():
-	global mapinfo
 	
 	image = pygame.image.load('resources%sa.png' % os.sep)
 	newmover = mover.Mover(x=12,y=12, direction=0, speed=0, image=image.convert_alpha())
-	mapinfo = readmap.MapObj('1.map')
+	global gameinfo
+	gameinfo = readmap.ReadMap('1.map')
 
-	cam = camera.cam(newmover.x, newmover.y, width, height, mapinfo.width()*32, mapinfo.height()*32)
+	cam = camera.cam(newmover.x, newmover.y, width, height, gameinfo.gamemap.width()*32, gameinfo.gamemap.height()*32)
 	
 	while True:
 		pygame.event.pump()
@@ -106,11 +108,14 @@ def main():
 
 #		cam.move(newmover.x, newmover.y)
 		
-		for k in mapinfo.map():
+		for k in gameinfo.gamemap.map():
 			for i in k:						
 				screen.blit(i.mat, (i.posx*32-cam.x,i.posy*32-cam.y))
 		screen.blit(newmover.image, (newmover.x-cam.x,newmover.y-cam.y))
-		cam.move(newmover.x, newmover.y)		
+		cam.move(newmover.x, newmover.y)
+		for ent in gameinfo.entlist.entlist:
+			print ent.position()
+			screen.blit(ent.mat, (ent.position()[0]-cam.x,ent.position()[1]-cam.y))
 		pygame.display.flip()
 		clock.tick(90)
 

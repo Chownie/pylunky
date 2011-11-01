@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from resources.blocks import *
+from resources.blocks.blocks import *
 from resources.entities import *
 import pygame
 from pygame.locals import *
@@ -17,11 +17,11 @@ class MapObj():
 	def __init__(self, add):
 		base = []
 		splitmap = add.split('\n')
-		for y in range(0,mapvar.count('\n')):
+		for y in range(0,len(splitmap)):
 			newbit = []
 			for x in range(0,len(splitmap[y])):
 				attri = blocks[splitmap[y][x]]
-				mat = pygame.image.load('resources%s%s'% (os.sep, attri['mat']))
+				mat = pygame.image.load('resources%sblocks%s%s'% (os.sep, os.sep, attri['mat']))
 				soli = attri['soli']
 				trans = attri['trans']
 				newbit.append(MapCell(x,y,mat,trans,soli))
@@ -44,7 +44,26 @@ class MapObj():
 		return len(self.mapinfo[0])
 
 class EntMap():
-	
+	def __init__(self, text=None):
+		rawentlist = text.split('\n')
+		self.entlist = []
+
+		del rawentlist[-1]
+
+		for ent in rawentlist:
+			print ent
+			entinfo = ent.split(' ')
+			entattri = entities.entschema[entinfo[0]]
+
+			mat = pygame.image.load('resources%sentities%s%s' % (os.sep, os.sep, entattri['mat']))
+			hp = entattri['hp']
+			x = int(entinfo[1])
+			y = int(entinfo[2])
+			self.entlist.append(entities.Entity(x,y,hp,mat))
+
+	def count(self):
+		return len(self.entlist)
+
 
 class Entity():
 	def __init__(self, x=None, y=None, hp=None, mat=None):
@@ -53,15 +72,15 @@ class Entity():
 		self.hp = hp
 		self.mat = mat
 
-	def move(x=self.x, y=self.y):
+	def move(self, x=None, y=None):
 		self.x = x
 		self.y = y
 	
 class ReadMap():
-	def __init__(self, file):
+	def __init__(self, file=None):
 		f = open(file,'r')
 		mapfile = f.read()
 		f.close()
-
+		
 		self.gamemap = MapObj(mapfile.split('MAP\n')[1])
 		self.entlist = EntMap(mapfile.split('ENT\n')[1].split('MAP\n')[0])
