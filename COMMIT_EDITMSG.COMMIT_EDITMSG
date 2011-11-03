@@ -1,0 +1,29 @@
+Health, bits, speed, etc
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# Just close the window to accept your message.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   1.map
+#	modified:   mover.py
+#	modified:   readmap.py
+#	modified:   resources/a.png
+#	modified:   resources/blocks/0.jpg
+#	modified:   resources/blocks/1.jpg
+#	modified:   resources/blocks/__init__.py
+#	modified:   resources/blocks/__init__.pyc
+#	modified:   resources/blocks/blocks.py
+#	modified:   resources/blocks/blocks.pyc
+#	modified:   resources/entities/entities.py
+#	modified:   resources/entities/entities.pyc
+#	modified:   simple_display.py
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	COMMIT_EDITMSG.COMMIT_EDITMSG
+#	resources/blocks/bits/
+#	resources/player/
+#	screenshot.png

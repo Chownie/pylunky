@@ -1,17 +1,21 @@
 #!/usr/bin/env python
 from resources.blocks.blocks import *
+from resources.blocks.bits import *
 from resources.entities import *
 import pygame
 from pygame.locals import *
 import os
+import random
 
 class MapCell():
-	def __init__(self, posx=None, posy=None, mat=None, trans=None, soli=None):
+	def __init__(self, posx=None, posy=None, mat=None, trans=None, soli=None, bittype=None, name=None):
 		self.mat = mat
 		self.posx = posx
 		self.posy = posy
 		self.trans = trans
 		self.soli = soli
+		self.bittype = bittype
+		self.name = name
 
 class MapObj():
 	def __init__(self, add):
@@ -24,9 +28,18 @@ class MapObj():
 				mat = pygame.image.load('resources%sblocks%s%s'% (os.sep, os.sep, attri['mat']))
 				soli = attri['soli']
 				trans = attri['trans']
-				newbit.append(MapCell(x,y,mat,trans,soli))
+				bittype = attri['bits']
+				if splitmap[y][x] == "&":
+					self.start = (x,y)
+				newbit.append(MapCell(x,y,mat,trans,soli,bittype,splitmap[y][x]))
 			base.append(newbit)
 		self.mapinfo = base
+
+		for row in self.mapinfo:
+			for item in row:
+				bitpass = bits.Bitloader()
+				bitdict = bitpass.images
+				bitpass.setoverlay(item, self, bitdict, item.bittype)
 
 	def tile(self, x, y):
 		if x < 0 or x >= self.width() or y < 0 or y >= self.height():
@@ -59,10 +72,16 @@ class EntMap():
 			hp = entattri['hp']
 			x = int(entinfo[1])
 			y = int(entinfo[2])
-			self.entlist.append(entities.Entity(x,y,hp,mat))
+			self.entlist.append(entities.Entity(x,y,hp,mat,entinfo[0]))
 
 	def count(self):
 		return len(self.entlist)
+
+	def add(self, entry=None):
+		self.entlist.append(entry)
+	
+	def rem(self, entry=None):
+		self.entlist.remove(entry)
 
 
 class Entity():
