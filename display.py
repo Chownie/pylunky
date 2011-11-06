@@ -13,11 +13,9 @@ class display():
 		self.showent(screen,camera,gameinfo)
 		self.hpdisp(screen,player)
 		self.gameover(screen,player)
-		screen.blit(self.textfont,(0,0))
 
 	def showent(self, screen=None,cam=None,gameinfo=None):
 		for ent in gameinfo.entlist.entlist:
-			print ent.name
 			fontsize = font.size(ent.name)
 			offcount = (32-ent.width,32-ent.height-8)
 
@@ -37,7 +35,7 @@ class display():
 
 				result = pygame.Surface((fontsize[0]+4, fontsize[1]+4), pygame.SRCALPHA)
 				result.fill((90,90,90,255))
-				result.blit(font.render(self.textfont,ent.name),(2,2))
+				result.blit(font.render(self.textfont,ent.text),(2,2))
 				screen.blit(result,(150,250))
 
 	def hpdisp(self, screen=None, player=None):

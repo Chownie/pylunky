@@ -4,10 +4,11 @@ def size(text):
 
 def render(font,text):
 	thumb = 0
-	textsurf = pygame.Surface((len(text)*12,16))
+	textsurf = pygame.Surface((len(text)*12,16), pygame.SRCALPHA)
 	for char in text:
 		charpos = fontdict[str(char)]
-		position = (charpos[0],charpos[1],charpos[0]+12,charpos[1]+16)
+		#print "%s:%s" % (str(char),charpos)
+		position = (charpos[0]*12,charpos[1]*16,charpos[0]+12,charpos[1]+16)
 		textsurf.blit(font,(thumb, 0),area=position)
 		thumb += 12
 	return textsurf
