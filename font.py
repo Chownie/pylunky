@@ -1,16 +1,27 @@
 import pygame
+import string
+
 def size(text):
-	return (12*len(text),16)
+	biggest_len = 0
+	for line in string.split(text, "\n"):
+		if len(line) > biggest_len:
+			biggest_len = len(line)
+	return (12*biggest_len,(string.count(text, "\n") + 1)*16)
 
 def render(font,text,color):
-	thumb = 0
-	textsurf = pygame.Surface((len(text)*12,16), pygame.SRCALPHA)
+	thumbx = 0
+	thumby = 0
+	textsurf = pygame.Surface(size(text), pygame.SRCALPHA)
 	for char in text:
+		if char == "\n":
+			thumbx = 0
+			thumby += 16
+			continue
 		charpos = fontdict.get(str(char), (15,5))
 		#print "%s:%s" % (str(char),charpos)
-		position = (charpos[0]*12,charpos[1]*16,12,16)
-		textsurf.blit(font,(thumb, 0),area=position)
-		thumb += 12
+		position = (charpos[0]*12,charpos[1]*16,charpos[0]+12,charpos[1]+16)
+		textsurf.blit(font,(thumbx, thumby),area=position)
+		thumbx += 12
 	textsurf.fill(color,special_flags=pygame.BLEND_RGBA_MULT)
 	return textsurf
 
