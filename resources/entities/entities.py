@@ -36,7 +36,7 @@ class Box(Entity):
 	def use(self, gameinfo=None, player=None):
 		namelist = ['gold','gem']
 		name = random.choice(namelist)
-		newent = entschema[random.choice(entschema.keys())]
+		newent = entschema[name]
 		
 		mat = pygame.image.load('resources%sentities%s%s' % (os.sep, os.sep, newent['mat']))
 		hp = newent['hp']

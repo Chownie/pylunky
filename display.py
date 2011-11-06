@@ -13,6 +13,7 @@ class display():
 		self.showent(screen,camera,gameinfo)
 		self.hpdisp(screen,player)
 		self.gameover(screen,player)
+		self.golddisp(screen,player)
 
 	def showent(self, screen=None,cam=None,gameinfo=None):
 		for ent in gameinfo.entlist.entlist:
@@ -24,19 +25,21 @@ class display():
 
 			result = pygame.Surface((fontsize[0]+4, fontsize[1]+4), pygame.SRCALPHA)
 			result.fill((90,90,90,40))
-			result.blit(font.render(self.textfont,ent.name),(2,2))
+			result.blit(font.render(self.textfont,ent.name,(90,90,180,255)),
+			(2,2))
 			screen.blit(result,position)
 
 	def sign(self,screen=None,cam=None,gameinfo=None,player=None):
 		for ent in gameinfo.entlist.entlist:
 			if ent.x == player.x/32 and ent.y == player.y/32 and ent.text != '':
 				fontsize = font.size(ent.text)
-				offcount = (32-ent.width,32-ent.height-8)
 
 				result = pygame.Surface((fontsize[0]+4, fontsize[1]+4), pygame.SRCALPHA)
-				result.fill((90,90,90,255))
-				result.blit(font.render(self.textfont,ent.text),(2,2))
-				screen.blit(result,(150,250))
+				result.fill((90,90,90,200))
+				result.blit(font.render(self.textfont,ent.text,(140,140,180,255)),
+				(2,2))
+				w = 150-fontsize[0]/2
+				screen.blit(result,(w,250))
 
 	def hpdisp(self, screen=None, player=None):
 		count = 0
@@ -46,7 +49,17 @@ class display():
 			screen.blit(player.media['heart'],(count+14,jiggle))
 			count += 12
 
-#	def golddisp(self, screen=None, player=None):
+	def golddisp(self, screen=None, player=None):
+		text = "$%s" % player.gold
+		fontsize = font.size(text)
+
+		result = pygame.Surface((fontsize[0]+4, fontsize[1]+4), pygame.SRCALPHA)
+
+		result.fill((90,90,90,150))
+		result.blit(font.render(self.textfont,text,(255,194,0,255)),
+		(2,2))
+
+		screen.blit(result,(12,32))
 
 	def gameover(self,screen=None,player=None):
 		if player.hp == 0:

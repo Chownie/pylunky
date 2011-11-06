@@ -2,15 +2,16 @@ import pygame
 def size(text):
 	return (12*len(text),16)
 
-def render(font,text):
+def render(font,text,color):
 	thumb = 0
 	textsurf = pygame.Surface((len(text)*12,16), pygame.SRCALPHA)
 	for char in text:
 		charpos = fontdict[str(char)]
 		#print "%s:%s" % (str(char),charpos)
-		position = (charpos[0]*12,charpos[1]*16,charpos[0]+12,charpos[1]+16)
+		position = (charpos[0]*12,charpos[1]*16,12,16)
 		textsurf.blit(font,(thumb, 0),area=position)
 		thumb += 12
+	textsurf.fill(color,special_flags=pygame.BLEND_RGBA_MULT)
 	return textsurf
 
 fontdict = {
