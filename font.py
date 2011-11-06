@@ -19,7 +19,7 @@ def render(font,text,color):
 			continue
 		charpos = fontdict.get(str(char), (15,5))
 		#print "%s:%s" % (str(char),charpos)
-		position = (charpos[0]*12,charpos[1]*16,charpos[0]+12,charpos[1]+16)
+		position = (charpos[0]*12,charpos[1]*16, 12, 16)
 		textsurf.blit(font,(thumbx, thumby),area=position)
 		thumbx += 12
 	textsurf.fill(color,special_flags=pygame.BLEND_RGBA_MULT)
