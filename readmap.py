@@ -64,7 +64,6 @@ class EntMap():
 		del rawentlist[-1]
 
 		for ent in rawentlist:
-			print ent
 			entinfo = ent.split(' ')
 			entattri = entities.entschema[entinfo[0]]
 
@@ -72,7 +71,14 @@ class EntMap():
 			hp = entattri['hp']
 			x = int(entinfo[1])
 			y = int(entinfo[2])
-			self.entlist.append(entities.Entity(x,y,hp,mat,entinfo[0]))
+			height = entattri['height']
+			width = entattri['width']
+			if len(entinfo) == 4:
+				text = entinfo[3].replace(';',' ')
+			else:
+				text = ''
+			print len(entinfo)
+			self.entlist.append(entattri['obj'](x,y,hp,mat,entinfo[0],text,width,height))
 
 	def count(self):
 		return len(self.entlist)

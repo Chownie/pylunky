@@ -24,7 +24,6 @@ class Bitloader():
 
 	def setoverlay(self, tile=None, mapinfo=None, bitdict=None, bittype=None):
 		types = bittype.split(':')
-		print types
 		for section in types:
 			if bittype == None:
 				tile.mat = tile.mat
