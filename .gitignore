@@ -2,3 +2,5 @@
 *.pyc
 #Vim stuff
 *.swp
+#Screenshots folder
+screenshots/*
