@@ -73,8 +73,12 @@ class EntMap():
 			y = int(entinfo[2])
 			height = entattri['height']
 			width = entattri['width']
-			if len(entinfo) == 4:
+			print len(entinfo)
+			if len(entinfo) > 3:
 				text = entinfo[3].replace(';',' ')
+				print text
+				text = text.replace('^',"\n")
+				print text
 			else:
 				text = ''
 			print len(entinfo)

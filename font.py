@@ -6,7 +6,7 @@ def render(font,text,color):
 	thumb = 0
 	textsurf = pygame.Surface((len(text)*12,16), pygame.SRCALPHA)
 	for char in text:
-		charpos = fontdict[str(char)]
+		charpos = fontdict.get(str(char), (15,5))
 		#print "%s:%s" % (str(char),charpos)
 		position = (charpos[0]*12,charpos[1]*16,12,16)
 		textsurf.blit(font,(thumb, 0),area=position)
