@@ -108,6 +108,8 @@ class Mover():
 		
 		if key[pygame.K_z]:
 			localtime = time.localtime()
+			if os.path.isdir("screenshots") == False:
+				os.makedirs("screenshots")
 			pygame.image.save(screen, 'screenshots%sscr-%s-%s.%s.png' %(os.sep, localtime[3], localtime[4], localtime[5]))
 
 		if key[pygame.K_ESCAPE]: 
